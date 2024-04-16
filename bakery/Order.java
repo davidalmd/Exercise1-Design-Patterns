@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import Cakes.Cake;
+
 /**
  * Store a collection of cakes being ordered by a customer
  */
