@@ -1,17 +1,28 @@
+import Filters.StrategyFilters;
+import Filters.ConcreteFilters.FriendStrategyFilter;
+import Filters.ConcreteFilters.LengthStrategyFilter;
+
 /**
  * Watches the search queries
  */
 public class Snooper {
-    private final WebSearchModel model;
 
     public Snooper(WebSearchModel model) {
-        this.model = model;
+        StrategyFilters friendFilter = new FriendStrategyFilter();
+        StrategyFilters lengthFilter = new LengthStrategyFilter(60);
 
-        model.addQueryObserver( new WebSearchModel.QueryObserver() {
+        model.addQueryObserver(new WebSearchModel.QueryObserver() {
             @Override
-            public void onQuery(String query) {
-                System.out.println("Query: " + query);
+            public void onQuery(String consulta) {
+                System.out.println("Oh Yes! " + consulta);
             }
-        });
+        }, friendFilter);
+
+        model.addQueryObserver(new WebSearchModel.QueryObserver() {
+            @Override
+            public void onQuery(String consulta) {
+                System.out.println("So long... " + consulta);
+            }
+        }, lengthFilter);
     }
 }
